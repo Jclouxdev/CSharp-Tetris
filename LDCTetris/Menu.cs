@@ -20,14 +20,10 @@ namespace LDCTetris
         public Menu()
         {
             InitializeComponent();
-            wplayer.URL = "musique.mp3";
-            wplayer.controls.play();
             diff = "easy";
             clears = false;
             clearValue = 0;
         }
-
-        WindowsMediaPlayer wplayer = new WindowsMediaPlayer();
 
         private void option_Click(object sender, EventArgs e)
         {

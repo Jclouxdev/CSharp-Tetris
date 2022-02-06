@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WMPLib;
 
 namespace LDCTetris
 {
@@ -15,6 +16,7 @@ namespace LDCTetris
         private Shape currentShape;
         private Shape nextShape;
         private Timer timer = new Timer();
+        private Timer timerSound= new Timer();
         private Timer timerDisplay = new Timer();
         int timerCount = 0;
         private string diff { get; set; }
@@ -22,6 +24,7 @@ namespace LDCTetris
         private int clearValue { get; set; }
         private int lastClear = 0;
         private int niveau = 0;
+        private WindowsMediaPlayer musicPlayer = new WindowsMediaPlayer();
         
         public Form1(string Diff, Boolean Clears, int ClearValue)
         {
@@ -49,6 +52,11 @@ namespace LDCTetris
 
             // Listener to KeyDown
             this.KeyDown += Form1KeyDown;
+
+            // timer sound
+            timerSound.Tick += TimerSoundCheck;
+            timerSound.Interval = 250;
+            timerSound.Start();
 
             // show clear text
             if (Clears)
@@ -448,6 +456,31 @@ namespace LDCTetris
             return shape;
         }
 
+        private void TimerSoundCheck(object obj, EventArgs e)
+        {
+            if(musicPlayer.playState != WMPPlayState.wmppsPlaying)
+            {
+                switch (niveau)
+                {
+                    case 0:
+                        musicPlayer.URL = "Tetris1.wav";
+                        musicPlayer.controls.play();
+                        break;
+                    case 1:
+                        musicPlayer.URL = "Tetris2.wav";
+                        musicPlayer.controls.play();
+                        break;
+                    case 2:
+                        musicPlayer.URL = "Tetris3.wav";
+                        musicPlayer.controls.play();
+                        break;
+                    default:
+                        musicPlayer.URL = "Tetris4.wav";
+                        musicPlayer.controls.play();
+                        break;
+                }
+            }
+        }
         private void clearGrid()
         {
             canvasDotArray = new int[canvasWidth, canvasHeight];
