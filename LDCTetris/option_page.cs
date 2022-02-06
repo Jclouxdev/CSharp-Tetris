@@ -12,34 +12,49 @@ namespace LDCTetris
 {
     public partial class option_page : Form
     {
-        public option_page()
+        Menu menuJeu;
+        public option_page(Menu menu)
         {
+            menuJeu = menu;
             InitializeComponent();
         }
    
+        private void RefreshLabelDiff()
+        {
+            labelDiff.Text = menuJeu.getDiff().ToUpper();
+        }
         private void easy_Click(object sender, EventArgs e)
         {
-            
-            
-
+            menuJeu.setDiff("easy");
+            RefreshLabelDiff();
         }
 
         private void medium_Click(object sender, EventArgs e)
         {
-
+            menuJeu.setDiff("medium");
+            RefreshLabelDiff();
         }
 
         private void hard_Click(object sender, EventArgs e)
         {
-
+            menuJeu.setDiff("hard");
+            RefreshLabelDiff();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            Menu retour = new Menu();
-            retour.ShowDialog();
-            
+            menuJeu.Show();
+            this.Dispose();
+        }
+
+        private void Clear_CheckedChanged(object sender, EventArgs e)
+        {
+            menuJeu.setClears(!menuJeu.getClears());
+        }
+
+        private void ClearPoints_ValueChanged(object sender, EventArgs e)
+        {
+            menuJeu.setClearValue(Decimal.ToInt16(ClearPoints.Value));
         }
     }
 }

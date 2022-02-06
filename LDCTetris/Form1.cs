@@ -12,13 +12,22 @@ namespace LDCTetris
 {
     public partial class Form1 : Form
     {
-        Shape currentShape;
-        Shape nextShape;
-        Timer timer = new Timer();
-        Timer timerDisplay = new Timer();
+        private Shape currentShape;
+        private Shape nextShape;
+        private Timer timer = new Timer();
+        private Timer timerDisplay = new Timer();
         int timerCount = 0;
-        public Form1()
+        private string diff { get; set; }
+        private Boolean clears { get; set; }
+        private int clearValue { get; set; }
+        private int lastClear = 0;
+        private int niveau = 0;
+        
+        public Form1(string Diff, Boolean Clears, int ClearValue)
         {
+            clears = Clears;
+            clearValue = ClearValue;
+            diff = Diff;
             InitializeComponent();
 
             // Load the playing area
@@ -40,6 +49,12 @@ namespace LDCTetris
 
             // Listener to KeyDown
             this.KeyDown += Form1KeyDown;
+
+            // show clear text
+            if (Clears)
+            {
+                labelClear.Text = String.Format("Clear du plateau :\n{0} points",ClearValue);
+            }
         }
 
         private void Form1KeyDown(object obj, KeyEventArgs e)
@@ -263,6 +278,7 @@ namespace LDCTetris
         {
             if(currentY < 0)
             {
+                timerDisplay.Stop();
                 timer.Stop();
                 MessageBox.Show("Game Over!");
                 Application.Exit();
@@ -272,9 +288,9 @@ namespace LDCTetris
         }
 
         int score;
-        //public string Diff;
         public void scoringSystem()
         {
+            int countRows = 1;
             // check through each rows
             for(int i = 0; i < canvasHeight; i++)
             {
@@ -290,23 +306,36 @@ namespace LDCTetris
                 if(j == -1)
                 {
                     // Update lavels
-                    score += 100;
+                    score += 100*countRows;
+                    countRows++;
                     scoreLabel.Text = "Score: " + score;
-                    levelLabel.Text = "Niveau: " + score / 1000;
-                    // MORE SPEEEEEEEEEED
-                    timer.Interval -= 15;
-                    //if (Diff == "easy")
-                    //{
-                    //    timer.Interval -= 10;
-                    //}
-                    //if (Diff == "medium")
-                    //{
-                    //    timer.Interval -= 20;
-                    //}
-                    //if (Diff == "hard")
-                    //{
-                    //    timer.Interval -= 40;
-                    //}
+                    if(niveau != score / 500)
+                    {
+                        // MORE SPEEEEEEEEEED
+                        if (diff == "easy")
+                        {
+                            timer.Interval -= 20;
+                        }
+                        if (diff == "medium")
+                        {
+                            timer.Interval -= 30;
+                        }
+                        if (diff == "hard")
+                        {
+                            timer.Interval -= 40;
+                        }
+                        niveau = score / 500;
+                    }
+                    levelLabel.Text = "Niveau: " + niveau;
+                    // check to clear
+                    if (clears)
+                    {
+                        if(score/clearValue != lastClear)
+                        {
+                            lastClear = score/clearValue;
+                            clearGrid();
+                        }
+                    }
 
                     // Update the dot array based on the check
                     for (j = 0; j < canvasWidth; j++)
