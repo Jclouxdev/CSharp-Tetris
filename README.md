@@ -12,5 +12,5 @@
         
 Ouvrir Visual studio, Cloner et appuyer sur le bouton démarrer
 
-3 dossier windowsform avec le design et les fonctions à l'intérieur 
-3 fichier, un pour lancer le programme et 2 pour la forme des objets
+-3 dossier windowsform avec le design et les fonctions à l'intérieur 
+-3 fichier, un pour lancer le programme et 2 pour la forme des objets
