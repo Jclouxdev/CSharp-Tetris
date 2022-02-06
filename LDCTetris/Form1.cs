@@ -15,6 +15,8 @@ namespace LDCTetris
         Shape currentShape;
         Shape nextShape;
         Timer timer = new Timer();
+        Timer timerDisplay = new Timer();
+        int timerCount = 0;
         public Form1()
         {
             InitializeComponent();
@@ -30,6 +32,11 @@ namespace LDCTetris
             timer.Tick += TimerEveryTick;
             timer.Interval = 500;
             timer.Start();
+
+            // Display Time
+            timerDisplay.Tick += TimerDisplayTick;
+            timerDisplay.Interval = 1000;
+            timerDisplay.Start();
 
             // Listener to KeyDown
             this.KeyDown += Form1KeyDown;
@@ -58,7 +65,9 @@ namespace LDCTetris
                 case Keys.Up:
                     currentShape.turn();
                     break;
-
+                case Keys.Z:
+                    clearGrid();
+                    break;
                 default:
                     return;
             }
@@ -91,6 +100,14 @@ namespace LDCTetris
 
                 scoringSystem();
             }
+        }
+
+        private void TimerDisplayTick(object obj, EventArgs e)
+        {
+            timerCount++;
+            int min = timerCount / 60;
+            int sec = timerCount % 60;
+            labelTime.Text = string.Format("{0}:{1}",min.ToString("00"),sec.ToString("00"));
         }
 
         Bitmap canvasBitmap;
@@ -233,22 +250,25 @@ namespace LDCTetris
                 {
                     if (currentShape.Dots[j, i] == 1)
                     {
-                        checkGameOver();
-
-                        canvasDotArray[currentX + i, currentY + j] = 1;
+                        if (!checkGameOver())
+                        {
+                            canvasDotArray[currentX + i, currentY + j] = 1;
+                        }
                     }
                 }
             }
         }
 
-        private void checkGameOver()
+        private Boolean checkGameOver()
         {
             if(currentY < 0)
             {
                 timer.Stop();
                 MessageBox.Show("Game Over!");
                 Application.Exit();
+                return true;
             }
+            return false;
         }
 
         int score;
@@ -287,10 +307,14 @@ namespace LDCTetris
                     }
                 }
             }
+            drawGrid();
+        }
 
-            for(int i = 0; i < canvasWidth; i++)
+        private void drawGrid()
+        {
+            for (int i = 0; i < canvasWidth; i++)
             {
-                for(int j = 0; j < canvasHeight; j++)
+                for (int j = 0; j < canvasHeight; j++)
                 {
                     canvasGraphics = Graphics.FromImage(canvasBitmap);
                     canvasGraphics.FillRectangle(
@@ -382,5 +406,10 @@ namespace LDCTetris
             return shape;
         }
 
+        private void clearGrid()
+        {
+            canvasDotArray = new int[canvasWidth, canvasHeight];
+            drawGrid();
+        }
     }
 }
