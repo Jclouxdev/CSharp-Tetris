@@ -32,12 +32,14 @@
             this.start = new System.Windows.Forms.Button();
             this.option = new System.Windows.Forms.Button();
             this.exit = new System.Windows.Forms.Button();
+            this.axWindowsMediaPlayer1 = new AxWMPLib.AxWindowsMediaPlayer();
+            ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer1)).BeginInit();
             this.SuspendLayout();
             // 
             // start
             // 
             this.start.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.start.Location = new System.Drawing.Point(234, 127);
+            this.start.Location = new System.Drawing.Point(237, 115);
             this.start.Name = "start";
             this.start.Size = new System.Drawing.Size(223, 83);
             this.start.TabIndex = 0;
@@ -67,6 +69,15 @@
             this.exit.UseVisualStyleBackColor = false;
             this.exit.Click += new System.EventHandler(this.exit_Click);
             // 
+            // axWindowsMediaPlayer1
+            // 
+            this.axWindowsMediaPlayer1.Enabled = true;
+            this.axWindowsMediaPlayer1.Location = new System.Drawing.Point(21, 23);
+            this.axWindowsMediaPlayer1.Name = "axWindowsMediaPlayer1";
+            this.axWindowsMediaPlayer1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axWindowsMediaPlayer1.OcxState")));
+            this.axWindowsMediaPlayer1.Size = new System.Drawing.Size(10, 10);
+            this.axWindowsMediaPlayer1.TabIndex = 3;
+            // 
             // Menu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -77,10 +88,12 @@
             this.Controls.Add(this.exit);
             this.Controls.Add(this.option);
             this.Controls.Add(this.start);
+            this.Controls.Add(this.axWindowsMediaPlayer1);
             this.DoubleBuffered = true;
             this.Name = "Menu";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Menu";
+            ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -90,5 +103,6 @@
         private System.Windows.Forms.Button start;
         private System.Windows.Forms.Button option;
         private System.Windows.Forms.Button exit;
+        private AxWMPLib.AxWindowsMediaPlayer axWindowsMediaPlayer1;
     }
 }

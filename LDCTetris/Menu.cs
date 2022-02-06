@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WMPLib;
+
 
 namespace LDCTetris
 {
@@ -15,7 +17,11 @@ namespace LDCTetris
         public Menu()
         {
             InitializeComponent();
+            wplayer.URL = "musique.mp3";
+            wplayer.controls.play();
         }
+
+        WindowsMediaPlayer wplayer = new WindowsMediaPlayer();
 
         private void option_Click(object sender, EventArgs e)
         {
@@ -39,5 +45,6 @@ namespace LDCTetris
         {
             Application.Exit();
         }
+
     }
 }
