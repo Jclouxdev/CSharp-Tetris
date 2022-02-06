@@ -39,6 +39,7 @@
             // 
             // pictureBox1
             // 
+            this.pictureBox1.BackColor = System.Drawing.Color.White;
             this.pictureBox1.Location = new System.Drawing.Point(18, 18);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pictureBox1.Name = "pictureBox1";
@@ -48,6 +49,7 @@
             // 
             // scoreBox
             // 
+            this.scoreBox.BackColor = System.Drawing.Color.White;
             this.scoreBox.Location = new System.Drawing.Point(500, 270);
             this.scoreBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.scoreBox.Name = "scoreBox";
@@ -89,6 +91,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Silver;
             this.ClientSize = new System.Drawing.Size(736, 688);
             this.Controls.Add(this.nextLabel);
             this.Controls.Add(this.levelLabel);
@@ -97,6 +100,7 @@
             this.Controls.Add(this.pictureBox1);
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.scoreBox)).EndInit();

@@ -252,6 +252,7 @@ namespace LDCTetris
         }
 
         int score;
+        //public string Diff;
         public void scoringSystem()
         {
             // check through each rows
@@ -273,7 +274,19 @@ namespace LDCTetris
                     scoreLabel.Text = "Score: " + score;
                     levelLabel.Text = "Niveau: " + score / 1000;
                     // MORE SPEEEEEEEEEED
-                    timer.Interval -= 20;
+                    timer.Interval -= 15;
+                    //if (Diff == "easy")
+                    //{
+                    //    timer.Interval -= 10;
+                    //}
+                    //if (Diff == "medium")
+                    //{
+                    //    timer.Interval -= 20;
+                    //}
+                    //if (Diff == "hard")
+                    //{
+                    //    timer.Interval -= 40;
+                    //}
 
                     // Update the dot array based on the check
                     for (j = 0; j < canvasWidth; j++)

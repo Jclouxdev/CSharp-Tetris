@@ -16,10 +16,11 @@ namespace LDCTetris
         {
             InitializeComponent();
         }
-
+   
         private void easy_Click(object sender, EventArgs e)
         {
-            //Form1.timer.Interval -= 10;
+            
+            
 
         }
 
@@ -31,6 +32,14 @@ namespace LDCTetris
         private void hard_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Menu retour = new Menu();
+            retour.ShowDialog();
+            
         }
     }
 }

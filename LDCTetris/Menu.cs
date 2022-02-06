@@ -19,15 +19,20 @@ namespace LDCTetris
 
         private void option_Click(object sender, EventArgs e)
         {
+            this.Hide();
             option_page option = new option_page();
-            option.ShowDialog();
+            option.Show();
+            
 
         }
 
         private void start_Click(object sender, EventArgs e)
         {
+            this.Hide();
             Form1 form = new Form1();
             form.ShowDialog();
+
+
         }
 
         private void exit_Click(object sender, EventArgs e)
